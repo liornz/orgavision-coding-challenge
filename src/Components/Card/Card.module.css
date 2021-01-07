@@ -1,0 +1,33 @@
+.card {
+  padding: 1rem;
+  border: 1px solid rgb(150, 150, 150);
+  box-shadow: 5px 5px 5px #ccc;
+  text-align: justify;
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.titleEmpty {
+  background-color: lightgray;
+  color: lightgray;
+  width: 4rem;
+}
+
+.category {
+  width: fit-content;
+  color: white;
+}
+
+.categoryEmpty {
+  background-color: lightgray;
+  color: lightgray;
+  width: 4rem;
+}
+
+.teaserEmpty {
+  background-color: lightgray;
+  color: lightgray;
+  width: fit-content;
+}

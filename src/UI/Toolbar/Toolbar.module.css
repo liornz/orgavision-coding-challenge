@@ -1,0 +1,12 @@
+.toolbar {
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(5, 116, 110);
+}
+
+.logo {
+  color: white;
+  margin: 0;
+}

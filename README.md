@@ -1,55 +1,46 @@
-# Coding Challenge: Knowledge Base Frontend
-![Knowledge Base Desktop](res/desktop.png)
+# Getting Started with Create React App
 
-Ziel der Aufgabe ist es, ein Frontend mit Filtermöglichkeiten zur Anzeige von Artikeln aus einer fiktiven Knowledge Base zu entwickeln.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Prototypen
-Zur Veranschaulichung der Funktionalität und zur Vorgabe des Designs existieren zwei Design-Prototypen:
+## Available Scripts
 
-- [Desktop-Prototype](https://framer.com/share/Coding-Frontend-Developer--lquySMVN3OZtTslz7B1g/VfUK15NXl)
-- [Mobile-Prototype](https://framer.com/share/Coding-Frontend-Developer--lquySMVN3OZtTslz7B1g/cQkg7Br8G#cQkg7Br8G)
+In the project directory, you can run:
 
-Beachte, dass die Prototypen nur der Veranschaulichung dienen und keine Produktionsreife Umsetzung darstellen.
+### `npm start`
 
-## Backend
-Das Backend ist über eine REST-API erreichbar:
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-- [Dokumentation der Backend-REST-API](https://documenter.getpostman.com/view/258409/TVzNGeMo#0b87bbc4-5d82-4deb-a3a3-c693dfaaa220)
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-## Fachliche Anforderungen
-Im Folgenden werden die fachlichen Anforderungen beschrieben, die Deine Implementierung erfüllen soll.
+### `npm test`
 
-### Allgemeine Anforderung
-1. Aufbau und Design der App entsprechen dem Prototyp. Das Design von Filter-Dropdown und Suchfeld darf im Detail abweichen.
-2. Die Darstellung ist responsiv
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### Darstellung
-1. Artikel aus der Knowledge Base werden als Karten in der Benutzeroberfläche dargestellt.
-2. Jede Karte enthält folgende Informationen des Artikels:
-	1. Titel
-	2. Kategorie in der Kategoriefarbe
-	3. Teaser-Text
-3. Die Karten sind in Zeilen angeordnet. Die Anzahl der pro Zeile dargestellten Karten hängt von der Breite des Browsers ab. Auf einem Smartphone wird nur eine Karte pro Zeile dargestellt.
-4. Passen nicht alle Karten auf den Bildschirm kann ich vertikal scrollen.
-5. Die Darstellung berücksichtigt variable Textlängen.
+### `npm run build`
 
-### Ladeverhalten
-1. Findet ein Ladevorgang statt, so wird ein Skeleton wie im Prototyp dargestellt.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### Filtern
-1. Ich kann die Artikelliste nach Kategorie und/oder Suchbegriff eingrenzen.
-	1. Wird nur die Kategorie angegeben, werden alle Artikel der Kategorie angezeigt
-	2. Wird nur ein Suchbegriff angegeben, werden alle Artikel angezeigt, die den Suchbegriff im Titel oder Teaser-Text enthalten angezeigt
-	3. Werden Kategorie _und_ Suchbegriff angegeben, werden alle Artikel angezeigt, die der Kategorie zugeordnet sind _und_ den Suchbegriff enthalten
-2. Filterung nach Kategorie durch
-	1. Auswahl einer Kategorie aus der Auswahlliste in der Titelleiste
-	2. Klick auf die Kategorie auf einer Artikelkarte
-3. Filterung nach Suchbegriff 
-	1. Eingabe des Suchbegriffs im Suchfeld
-	2. Es wird bereits während der Eingabe gefiltert
-4. Existieren keine Artikel die den Filterkriterien entsprechen wird ein Platzhalterinhalt wie im Prototyp dargestellt
-5. Um eine echte Anwendung nachzuahmen, führt jede Anpassung der Filterkriterien zu einem Laden der Artikel vom Backend
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Technische Anforderungen
-1. Implementiere die Anwendung in TypeScript mit React
-2. Schreibe _Unit_-Tests um die Funktionsfähigkeit des Filterverhaltens über die betroffenen Komponenten hinweg sicherzustellen
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
