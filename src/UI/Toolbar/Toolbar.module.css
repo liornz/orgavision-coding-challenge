@@ -6,6 +6,13 @@
   background-color: rgb(5, 116, 110);
 }
 
+@media (max-width: 640px) {
+  .toolbar {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 .logo {
   color: white;
   margin: 0;
