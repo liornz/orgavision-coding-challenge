@@ -4,6 +4,7 @@ import Card from '../Card/Card';
 import Toolbar from '../../UI/Toolbar/Toolbar';
 import styles from './ArticleList.module.css';
 import Modal from '../../UI/Modal/Modal';
+import { debounce } from 'lodash';
 
 interface Props {}
 
@@ -73,9 +74,9 @@ const ArticleList: React.FC<Props> = () => {
     setCategoryFilter(filter);
   };
 
-  const handleSearchTxtChange = (text: string) => {
+  const handleSearchTxtChange = debounce((text: string) => {
     SetSearchTxt(text);
-  };
+  }, 300);
 
   const fetchData = useCallback(async () => {
     setIsLoading(true);
