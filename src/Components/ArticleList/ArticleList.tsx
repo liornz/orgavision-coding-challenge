@@ -60,7 +60,7 @@ const fetchCategories = async () => {
 
 const ArticleList: React.FC<Props> = () => {
   const [artListArr, setArtListArr] = useState<article[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [searchTxt, SetSearchTxt] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -105,8 +105,9 @@ const ArticleList: React.FC<Props> = () => {
   }, [searchTxt, categoryFilter]);
 
   useEffect(() => {
-    fetchCategories();
-    fetchData();
+    fetchCategories().then((res) => {
+      fetchData();
+    });
   }, [fetchData]);
 
   const emptyArticle = {
@@ -126,28 +127,30 @@ const ArticleList: React.FC<Props> = () => {
         categories={categoriesArr}
         filteredCategory={categoryFilter}
       />
-      {artListArr.length === 0 ? (
+      {isLoading ? (
+        <div className={styles.list}>
+          <Card
+            article={emptyArticle}
+            openModal={modalToggler}
+            catFilter={handleCatFilterChange}
+          />
+        </div>
+      ) : artListArr.length === 0 ? (
         <div className={styles.noResults}>
           <h2>No Results for Your Search Criteria</h2>
         </div>
       ) : (
         <div className={styles.list}>
-          {isLoading ? (
-            <Card
-              article={emptyArticle}
-              openModal={modalToggler}
-              catFilter={handleCatFilterChange}
-            />
-          ) : (
-            artListArr.map((article) => (
+          {artListArr.map((article) => {
+            return (
               <Card
                 key={article.id}
                 article={article}
                 openModal={modalToggler}
                 catFilter={handleCatFilterChange}
               />
-            ))
-          )}
+            );
+          })}
         </div>
       )}
       <Modal show={showModal} close={modalToggler} />
@@ -156,3 +159,4 @@ const ArticleList: React.FC<Props> = () => {
 };
 
 export default ArticleList;
+
