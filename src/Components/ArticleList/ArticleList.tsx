@@ -129,7 +129,7 @@ const ArticleList: React.FC<Props> = () => {
         filteredCategory={categoryFilter}
       />
       {isLoading ? (
-        <div className={styles.list}>
+        <div data-testid='loading' className={styles.list}>
           <Card
             article={emptyArticle}
             openModal={modalToggler}
