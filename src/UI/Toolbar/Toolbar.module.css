@@ -10,10 +10,17 @@
   .toolbar {
     flex-direction: column;
     justify-content: center;
+    align-items: stretch;
   }
 }
 
 .logo {
   color: white;
   margin: 0;
+}
+
+@media (max-width: 640px) {
+  .logo {
+    margin-bottom: 1rem;
+  }
 }

@@ -12,6 +12,7 @@ interface Props {
   changeCategory: (category: string) => void;
   changeText: (text: string) => void;
   categories: categoriesData[];
+  filteredCategory: string;
 }
 
 const Toolbar: React.FC<Props> = (props) => {

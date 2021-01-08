@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Card.module.css';
 
-
 interface article {
   id: string;
   title: string;
@@ -12,20 +11,42 @@ interface article {
 }
 
 interface Props {
-article : article;
+  article: article;
+  openModal?: () => void;
+  catFilter: (filter: string) => void;
 }
 
-const Card: React.FC<Props> = ({article}) => {
+const Card: React.FC<Props> = ({ article, openModal, catFilter }) => {
+ 
 
   const noData = article.id === '';
-  const categoryDNPlacegolder = noData ? '_______': null;
+  const categoryDNPlaceholder = noData ? '_______' : article.categoryDisplayName;
 
   return (
-    <div className={styles.card}>
-      <h3 className={noData ? styles.titleEmpty : styles.title}>{article.title}</h3>
-      <p style={{backgroundColor: noData ? 'lightgrey' : article.categoryDisplayColor}} className={noData ? styles.categoryEmpty : styles.category}>{article.categoryDisplayName || categoryDNPlacegolder}</p>
-      <p className={noData ? styles.teaserEmpty : styles.teaser}>{article.teaser}</p>
-    </div>
+    <>
+      <div className={styles.card}>
+        <h3
+          className={noData ? styles.titleEmpty : styles.title}
+          onClick={openModal}
+        >
+          {article.title}
+        </h3>
+        <p
+          style={{
+            backgroundColor: noData
+              ? 'lightgrey'
+              : article.categoryDisplayColor,
+          }}
+          className={noData ? styles.categoryEmpty : styles.category}
+          onClick={() => catFilter(article.categoryDisplayName || '')}
+        >
+          {article.categoryDisplayName || categoryDNPlaceholder}
+        </p>
+        <p className={noData ? styles.teaserEmpty : styles.teaser}>
+          {article.teaser}
+        </p>
+      </div>
+    </>
   );
 };
 

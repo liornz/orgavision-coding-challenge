@@ -1,0 +1,29 @@
+.container {
+  position: relative;
+}
+
+.modal {
+  padding: 2rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 10rem;
+  height: 5rem;
+  border: 2px solid #ccc;
+  box-shadow: 2px 2px 2px #ccc;
+  z-index: 100;
+  background-color: white;
+  font-family: sans-serif;
+  font-size: 2rem;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+}

@@ -3,6 +3,7 @@ import axios from 'axios';
 import Card from '../Card/Card';
 import Toolbar from '../../UI/Toolbar/Toolbar';
 import styles from './ArticleList.module.css';
+import Modal from '../../UI/Modal/Modal';
 
 interface Props {}
 
@@ -62,6 +63,11 @@ const ArticleList: React.FC<Props> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [searchTxt, SetSearchTxt] = useState('');
+  const [showModal, setShowModal] = useState(false);
+
+  const modalToggler = () => {
+    setShowModal((state) => !state);
+  };
 
   const handleCatFilterChange = (filter: string) => {
     setCategoryFilter(filter);
@@ -93,6 +99,8 @@ const ArticleList: React.FC<Props> = () => {
         };
       });
       setArtListArr(articleArr);
+    } else {
+      setArtListArr([]);
     }
   }, [searchTxt, categoryFilter]);
 
@@ -116,20 +124,33 @@ const ArticleList: React.FC<Props> = () => {
         changeText={handleSearchTxtChange}
         changeCategory={handleCatFilterChange}
         categories={categoriesArr}
+        filteredCategory={categoryFilter}
       />
-      <div className={styles.list}>
-        {isLoading ? (
-          <Card article={emptyArticle} />
-        ) : artListArr.length === 0 ? (
-          <div className={styles.noResults}>
-            <h2>No Results for Your Search Criteria</h2>
-          </div>
-        ) : (
-          artListArr.map((article) => (
-            <Card key={article.id} article={article} />
-          ))
-        )}
-      </div>
+      {artListArr.length === 0 ? (
+        <div className={styles.noResults}>
+          <h2>No Results for Your Search Criteria</h2>
+        </div>
+      ) : (
+        <div className={styles.list}>
+          {isLoading ? (
+            <Card
+              article={emptyArticle}
+              openModal={modalToggler}
+              catFilter={handleCatFilterChange}
+            />
+          ) : (
+            artListArr.map((article) => (
+              <Card
+                key={article.id}
+                article={article}
+                openModal={modalToggler}
+                catFilter={handleCatFilterChange}
+              />
+            ))
+          )}
+        </div>
+      )}
+      <Modal show={showModal} close={modalToggler} />
     </>
   );
 };

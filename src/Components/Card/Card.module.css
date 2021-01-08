@@ -18,6 +18,7 @@
 .category {
   width: fit-content;
   color: white;
+  cursor: pointer;
 }
 
 .categoryEmpty {

@@ -11,9 +11,15 @@ interface Props {
   changeCategory: (category: string) => void;
   changeText: (text: string) => void;
   categories: categoriesData[];
+  filteredCategory: string;
 }
 
-const Search: React.FC<Props> = ({changeCategory, changeText, categories}) => {
+const Search: React.FC<Props> = ({
+  changeCategory,
+  changeText,
+  categories,
+  filteredCategory
+}) => {
   const [textSearch, setTextSearch] = useState('');
 
   const handleInputTextChange = (
@@ -28,11 +34,11 @@ const Search: React.FC<Props> = ({changeCategory, changeText, categories}) => {
   ) => {
     changeCategory(event.target.value);
   };
-  
+
   return (
     <div className={styles.search}>
-      <input type="text" value={textSearch} onChange={handleInputTextChange} />
-      <select name="category" id="catfilter" onChange={handleCategoryChange}>
+      <input type="text" value={textSearch} onChange={handleInputTextChange} placeholder='Suchen'/>
+      <select name="category" id="catfilter" onChange={handleCategoryChange} value={filteredCategory} >
         <option value="">Alle Kategorien</option>
         {categories.map((cat) => (
           <option key={cat.id} value={cat.name}>
