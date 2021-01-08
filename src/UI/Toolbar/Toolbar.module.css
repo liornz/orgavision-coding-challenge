@@ -1,11 +1,15 @@
 .toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(5, 116, 110);
+  background-color: rgb(11, 66, 167);
 }
-
+  
 @media (max-width: 640px) {
   .toolbar {
     flex-direction: column;
