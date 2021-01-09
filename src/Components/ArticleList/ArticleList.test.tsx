@@ -9,5 +9,4 @@ test('ArticleList Component', async () => {
     expect(screen.getByTestId('loading')).not.toBeInTheDocument();
   })
   console.log(window.document.body.innerHTML);
-  // expect(screen.getByText('Hello')).toBeInTheDocument();
 });

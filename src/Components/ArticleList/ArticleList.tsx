@@ -47,16 +47,20 @@ interface categoriesData {
 let categoriesArr: categoriesData[] = [];
 
 const fetchCategories = async () => {
-  const categoryUrl =
-    'https://orgavision-codingchallenge.azurewebsites.net/v1/category';
-  const resCategories = await axios.get<categoriesResponse>(categoryUrl);
-  categoriesArr = resCategories.data.records.map((cat) => {
-    return {
-      id: cat.id,
-      color: cat.fields.color,
-      name: cat.fields.name,
-    };
-  });
+  try {
+    const categoryUrl =
+      'https://orgavision-codingchallenge.azurewebsites.net/v1/category';
+    const resCategories = await axios.get<categoriesResponse>(categoryUrl);
+    categoriesArr = resCategories.data.records.map((cat) => {
+      return {
+        id: cat.id,
+        color: cat.fields.color,
+        name: cat.fields.name,
+      };
+    });
+  } catch (err) {
+          alert('Could not fetch categories - display degraded!');
+  }
 };
 
 const ArticleList: React.FC<Props> = () => {
@@ -107,7 +111,14 @@ const ArticleList: React.FC<Props> = () => {
 
   useEffect(() => {
     fetchCategories().then((res) => {
-      fetchData();
+      fetchData()
+        .then()
+        .catch((err) => {
+          alert('Could not fetch Data!');
+        })
+        .catch((err) => {
+          alert('Could not fetch categories - display degraded!');
+        });
     });
   }, [fetchData]);
 
@@ -129,7 +140,7 @@ const ArticleList: React.FC<Props> = () => {
         filteredCategory={categoryFilter}
       />
       {isLoading ? (
-        <div data-testid='loading' className={styles.list}>
+        <div data-testid="loading" className={styles.list}>
           <Card
             article={emptyArticle}
             openModal={modalToggler}
@@ -160,4 +171,3 @@ const ArticleList: React.FC<Props> = () => {
 };
 
 export default ArticleList;
-
