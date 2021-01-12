@@ -59,7 +59,7 @@ const fetchCategories = async () => {
       };
     });
   } catch (err) {
-          alert('Could not fetch categories - display degraded!');
+    alert('Could not fetch categories - display degraded!');
   }
 };
 

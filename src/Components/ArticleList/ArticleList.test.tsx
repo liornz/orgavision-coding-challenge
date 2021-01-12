@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, getByTestId, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 
 import ArticleList from './ArticleList';
 
