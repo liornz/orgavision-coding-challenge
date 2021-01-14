@@ -8,7 +8,7 @@ import {
 
 let categoriesArr: categoriesData[] = [];
 
-const fetchCategories = async () => {
+const getCategories = async () => {
   try {
     const categoryUrl =
       'https://orgavision-codingchallenge.azurewebsites.net/v1/category';
@@ -26,10 +26,10 @@ const fetchCategories = async () => {
   }
 };
 
-const fetchData = async (articleUrl: string) => {
+const getArticles = async (articleUrl: string) => {
   let categoriesArr: categoriesData[] | undefined;
   try {
-    categoriesArr = await fetchCategories();
+    categoriesArr = await getCategories();
   } catch (err) {
     alert('Could not fetch categories data - display degraded!');
   }
@@ -64,4 +64,4 @@ const fetchData = async (articleUrl: string) => {
   }
 };
 
-export default fetchData;
+export default getArticles;

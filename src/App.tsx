@@ -4,7 +4,7 @@ import ArticleList from './containers/ArticleList/ArticleList';
 import Modal from './UI/Modal/Modal';
 import Toolbar from './Components/Toolbar/Toolbar';
 import Card from './Components/Card/Card';
-import fetchData from './network/getDataStatic';
+import getArticles from './network/getDataStatic';
 import { article, categoriesData } from './types/types';
 import './App.css';
 
@@ -27,7 +27,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchData(articleUrl)
+    getArticles(articleUrl)
       .then((res) => {
         setArtListArr(res.articleArr);
         setCategoriesArr(res.categoriesArr);

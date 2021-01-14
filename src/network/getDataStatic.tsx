@@ -3,7 +3,7 @@ import { json, categoryList } from '../Data/Data';
 
 let categoriesArr: categoriesData[] = [];
 
-const fetchCategories = () => {
+const getCategories = () => {
     categoriesArr = categoryList.map((cat) => {
       return {
         id: cat.code,
@@ -14,8 +14,8 @@ const fetchCategories = () => {
     return categoriesArr;
 };
 
-const fetchData = async (articleUrl: string) => {
-    const categoriesArr = fetchCategories();
+const getArticles = async (articleUrl: string) => {
+    const categoriesArr = getCategories();
     const articleArr: article[] = json.records.map((item) => {
       return {
         id: item.id,
@@ -36,4 +36,4 @@ const fetchData = async (articleUrl: string) => {
     };
 };
 
-export default fetchData;
+export default getArticles;
