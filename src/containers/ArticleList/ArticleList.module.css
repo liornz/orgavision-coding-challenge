@@ -1,9 +1,9 @@
 .list {
-  margin-top: 100px;
+  margin-top: 6.25rem;
   padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-auto-rows: 18rem;
+  grid-template-columns: repeat(auto-fill, minmax(17.8125rem, 1fr));
+  grid-auto-rows: 15rem;
   gap: 2rem;
 }
 

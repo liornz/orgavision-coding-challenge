@@ -1,13 +1,31 @@
+.list {
+  margin-top: 6.25rem;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+  grid-auto-rows: 18rem;
+  gap: 2rem;
+}
+
 .card {
   padding: 1rem;
-  border: 1px solid rgb(150, 150, 150);
-  box-shadow: 5px 5px 5px #ccc;
+  border: .0625rem solid rgb(150, 150, 150);
+  box-shadow: .3125rem .3125rem .3125rem #ccc;
   text-align: justify;
 }
 
 .title {
+  display: block;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
+  font-weight: 700;
   cursor: pointer;
+  border: none;
+  background-color: white;
+}
+
+.title:focus {
+  outline: none;
 }
 
 .titleEmpty {
@@ -17,9 +35,12 @@
 }
 
 .category {
-  width: fit-content;
+  /* width: fit-content; */
+  padding: 0.3rem 0.5rem;
   color: white;
   cursor: pointer;
+  border: none;
+  border-radius: .625rem;
 }
 
 .categoryEmpty {

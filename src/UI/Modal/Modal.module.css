@@ -10,8 +10,8 @@
   transform: translateX(-50%) translateY(-50%);
   width: 10rem;
   height: 5rem;
-  border: 2px solid #ccc;
-  box-shadow: 2px 2px 2px #ccc;
+  border: 0.125rem solid #ccc;
+  box-shadow: 0.125rem 0.125rem 0.125rem #ccc;
   z-index: 100;
   background-color: white;
   font-family: sans-serif;

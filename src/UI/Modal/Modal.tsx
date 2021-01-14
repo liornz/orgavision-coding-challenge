@@ -6,7 +6,8 @@ interface Props {
   show: boolean;
 }
 
-const Modal: React.FC<Props> = ({close, show}) => {
+const Modal: React.FC<Props> = (props) => {
+  const { close, show } = props;
   return show ? (
     <div className={styles.container}>
       <div className={styles.modal}>Hello From Lior Nitzan</div>

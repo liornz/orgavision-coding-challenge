@@ -1,53 +1,48 @@
 import React from 'react';
 import styles from './Card.module.css';
-
-interface article {
-  id: string;
-  title: string;
-  teaser: string;
-  category: string[];
-  categoryDisplayName: string | undefined;
-  categoryDisplayColor: string | undefined;
-}
+import { article } from '../../types/types';
 
 interface Props {
-  article: article;
-  openModal?: () => void;
+  article: article | undefined;
+  openModal: () => void;
   catFilter: (filter: string) => void;
 }
 
-const Card: React.FC<Props> = ({ article, openModal, catFilter }) => {
- 
+const Card: React.FC<Props> = (props) => {
+  const { article, openModal, catFilter } = props;
 
-  const noData = article.id === '';
-  const categoryDNPlaceholder = noData ? '_______' : article.categoryDisplayName;
-
-  return (
-    <>
-      <div className={styles.card}>
-        <h3
-          className={noData ? styles.titleEmpty : styles.title}
-          onClick={openModal}
-        >
-          {article.title}
-        </h3>
-        <p
-          style={{
-            backgroundColor: noData
-              ? 'lightgrey'
-              : article.categoryDisplayColor,
-          }}
-          className={noData ? styles.categoryEmpty : styles.category}
-          onClick={() => catFilter(article.categoryDisplayName || '')}
-        >
-          {article.categoryDisplayName || categoryDNPlaceholder}
-        </p>
-        <p className={noData ? styles.teaserEmpty : styles.teaser}>
-          {article.teaser}
-        </p>
-      </div>
-    </>
-  );
+  const cardDisplay = () => {
+    if (article === undefined) {
+      return (
+        <div className={styles.list}>
+          <div className={styles.card}>
+            <h3 className={styles.titleEmpty}>XXXXX</h3>
+            <p className={styles.categoryEmpty}>XXXXXX</p>
+            <p className={styles.teaserEmpty}>
+              XXX XXX XXX XXXX XXX XXX XXXX XXX XXX XXX XXX XXX
+            </p>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className={styles.card}>
+          <button className={styles.title} onClick={openModal}>
+            {article.title}
+          </button>   
+          <button
+            className={styles.category}
+            style={{backgroundColor: article.categoryDisplayColor}}
+            onClick={() => catFilter(article.categoryDisplayName || '')}
+          >
+            {article.categoryDisplayName}
+          </button>
+          <p className={styles.teaser}>{article.teaser}</p>
+        </div>
+      );
+    }
+  };
+  return cardDisplay();
 };
 
 export default Card;

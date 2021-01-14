@@ -1,25 +1,17 @@
 import React, { useState } from 'react';
 import styles from './Search.module.css';
+import { categoriesData } from '../../types/types';
 
-interface categoriesData {
-  id: string;
-  color: string;
-  name: string;
-}
 
 interface Props {
   changeCategory: (category: string) => void;
   changeText: (text: string) => void;
-  categories: categoriesData[];
+  categories: categoriesData[] | undefined;
   filteredCategory: string;
 }
 
-const Search: React.FC<Props> = ({
-  changeCategory,
-  changeText,
-  categories,
-  filteredCategory
-}) => {
+const Search: React.FC<Props> = (props) => {
+  const { changeCategory, changeText, categories, filteredCategory } = props;
   const [textSearch, setTextSearch] = useState('');
 
   const handleInputTextChange = (
@@ -37,10 +29,10 @@ const Search: React.FC<Props> = ({
 
   return (
     <div className={styles.search}>
-      <input type="text" value={textSearch} onChange={handleInputTextChange} placeholder='Suchen'/>
+      <input type="text" value={textSearch} onChange={handleInputTextChange} placeholder='suchen'/>
       <select name="category" id="catfilter" onChange={handleCategoryChange} value={filteredCategory} >
         <option value="">Alle Kategorien</option>
-        {categories.map((cat) => (
+        { categories !== undefined && categories.map((cat) => (
           <option key={cat.id} value={cat.name}>
             {cat.name}
           </option>
