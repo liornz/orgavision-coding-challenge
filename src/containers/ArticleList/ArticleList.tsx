@@ -12,11 +12,6 @@ interface Props {
 const ArticleList: React.FC<Props> = React.memo((props) => {
   const { artListArr, handleCatFilterChange, modalToggler } = props;
 
-  // const temp = Math.random();
-  // if (temp > 0.5) {
-  //   throw new Error('Error Simulation');
-  // }
-
   const renderArticleCards = () => {
     if (artListArr === undefined) {
       return (

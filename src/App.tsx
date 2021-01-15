@@ -4,7 +4,7 @@ import ArticleList from './containers/ArticleList/ArticleList';
 import Modal from './UI/Modal/Modal';
 import Toolbar from './Components/Toolbar/Toolbar';
 import Card from './Components/Card/Card';
-import getArticles from './network/getDataStatic';
+import getArticles from './network/getData';
 import { article, categoriesData } from './types/types';
 import './App.css';
 
@@ -20,6 +20,10 @@ const App: React.FC = () => {
   const [searchTxt, SetSearchTxt] = useState('');
   const [showModal, setShowModal] = useState(false);
 
+  const showErrorMessage = useCallback((message: string) => {
+    alert(message);
+  }, []);
+
   const articleUrl = `https://orgavision-codingchallenge.azurewebsites.net/v1/article
     ?category=${encodeURI(categoryFilter)}
     &search=${encodeURI(searchTxt)}`;
@@ -30,12 +34,15 @@ const App: React.FC = () => {
       .then((res) => {
         setArtListArr(res.articleArr);
         setCategoriesArr(res.categoriesArr);
+        if (res.categoriesArr === undefined) {
+          showErrorMessage('Data categories could be retrieved. Display degraded!');
+        }
         setIsLoading(false);
       })
       .catch((err) => {
         setIsLoading(false);
       });
-  }, [articleUrl]);
+  }, [articleUrl, showErrorMessage]);
 
   const modalToggler = useCallback(() => {
     setShowModal((state) => !state);
