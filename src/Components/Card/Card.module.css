@@ -2,8 +2,8 @@
   margin-top: 6.25rem;
   padding: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
-  grid-auto-rows: 18rem;
+  grid-template-columns: repeat(auto-fill, minmax(17.8125rem, 1fr));
+  grid-auto-rows: 15rem;
   gap: 2rem;
 }
 
@@ -31,7 +31,7 @@
 .titleEmpty {
   background-color: lightgray;
   color: lightgray;
-  width: 4rem;
+  width: fit-content;
 }
 
 .category {
@@ -46,7 +46,7 @@
 .categoryEmpty {
   background-color: lightgray;
   color: lightgray;
-  width: 4rem;
+  display: inline-block;
 }
 
 .teaserEmpty {

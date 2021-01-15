@@ -11,38 +11,42 @@ interface Props {
 const Card: React.FC<Props> = (props) => {
   const { article, openModal, catFilter } = props;
 
-  const cardDisplay = () => {
+  const skeletonCard = (
+    <div className={styles.list}>
+      <div className={styles.card}>
+        <h3 className={styles.titleEmpty}>XXX XX XX XX</h3>
+        <p className={styles.categoryEmpty}>XXXXXX</p>
+        <p className={styles.teaserEmpty}>
+          XXX XXX XXX XXXX XXX XXX XXXX XXX XXX XXX XXX XXX
+        </p>
+      </div>
+    </div>
+  );
+
+  const articleCard = (
+    <div className={styles.card}>
+      <button className={styles.title} onClick={openModal}>
+        {article?.title}
+      </button>
+      <button
+        className={styles.category}
+        style={{ backgroundColor: article?.categoryDisplayColor }}
+        onClick={() => catFilter(article?.categoryDisplayName || '')}
+      >
+        {article?.categoryDisplayName}
+      </button>
+      <p className={styles.teaser}>{article?.teaser}</p>
+    </div>
+  );
+
+  const renderCard = () => {
     if (article === undefined) {
-      return (
-        <div className={styles.list}>
-          <div className={styles.card}>
-            <h3 className={styles.titleEmpty}>XXXXX</h3>
-            <p className={styles.categoryEmpty}>XXXXXX</p>
-            <p className={styles.teaserEmpty}>
-              XXX XXX XXX XXXX XXX XXX XXXX XXX XXX XXX XXX XXX
-            </p>
-          </div>
-        </div>
-      );
+      return skeletonCard;
     } else {
-      return (
-        <div className={styles.card}>
-          <button className={styles.title} onClick={openModal}>
-            {article.title}
-          </button>   
-          <button
-            className={styles.category}
-            style={{backgroundColor: article.categoryDisplayColor}}
-            onClick={() => catFilter(article.categoryDisplayName || '')}
-          >
-            {article.categoryDisplayName}
-          </button>
-          <p className={styles.teaser}>{article.teaser}</p>
-        </div>
-      );
+      return articleCard;
     }
   };
-  return cardDisplay();
+  return renderCard();
 };
 
 export default Card;

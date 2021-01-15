@@ -20,10 +20,9 @@ const App: React.FC = () => {
   const [searchTxt, SetSearchTxt] = useState('');
   const [showModal, setShowModal] = useState(false);
 
-  const articleUrl = `https://orgavision-codingchallenge.azurewebsites.net/v1/article?
-  category=${encodeURI(
-    categoryFilter
-  )}&search=${encodeURI(searchTxt)}`;
+  const articleUrl = `https://orgavision-codingchallenge.azurewebsites.net/v1/article
+    ?category=${encodeURI(categoryFilter)}
+    &search=${encodeURI(searchTxt)}`;
 
   useEffect(() => {
     setIsLoading(true);
@@ -46,16 +45,18 @@ const App: React.FC = () => {
     setCategoryFilter(filter);
   }, []);
 
-  const handleSearchTxtChange = debounce(useCallback((text: string) => {
-    SetSearchTxt(text);
-  }, []), 300);
+  const handleSearchTxtChange = debounce(
+    useCallback((text: string) => {
+      SetSearchTxt(text);
+    }, []),
+    300
+  );
 
   const articleDisplay = isLoading ? (
-    <Card
-      article={undefined}
-      openModal={() => {}}
-      catFilter={() => {}}
-    />
+    <Card 
+      article={undefined} 
+      openModal={() => {}} 
+      catFilter={() => {}} />
   ) : (
     <ArticleList
       artListArr={artListArr}
@@ -76,6 +77,6 @@ const App: React.FC = () => {
       <Modal show={showModal} close={modalToggler} />
     </div>
   );
-}
+};
 
 export default App;
