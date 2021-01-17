@@ -3,8 +3,9 @@ import { debounce } from 'lodash';
 import ArticleList from './containers/ArticleList/ArticleList';
 import Modal from './UI/Modal/Modal';
 import Toolbar from './Components/Toolbar/Toolbar';
+import Search from './Components/Search/Search';
 import Card from './Components/Card/Card';
-import getArticles from './network/getData';
+import getArticles from './network/getDataStatic';
 import { article, categoriesData } from './types/types';
 import './App.css';
 
@@ -59,6 +60,15 @@ const App: React.FC = () => {
     300
   );
 
+  const searchComponent = (
+    <Search 
+        changeText={handleSearchTxtChange}
+        changeCategory={handleCatFilterChange}
+        categories={categoriesArr}
+        filteredCategory={categoryFilter}
+        />
+  );
+
   const articleDisplay = isLoading ? (
     <Card 
       article={undefined} 
@@ -74,11 +84,8 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <Toolbar
-        changeText={handleSearchTxtChange}
-        changeCategory={handleCatFilterChange}
-        categories={categoriesArr}
-        filteredCategory={categoryFilter}
+      <Toolbar 
+        search={searchComponent}
       />
       {articleDisplay}
       <Modal show={showModal} close={modalToggler} />
