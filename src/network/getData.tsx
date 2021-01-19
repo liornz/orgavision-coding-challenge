@@ -27,18 +27,17 @@ const getArticles = async (articleUrl: string) => {
   const categoriesArr = await getCategories();
   try {
     const response = await axios.get<backendResponse>(articleUrl);
-
     const articleArr: article[] = response.data.records.map((item) => {
       return {
         id: item.id,
         title: item.fields.title,
         teaser: item.fields.teaser,
-        category: item.fields.category,
+        category: item.fields.categoryId,
         categoryDisplayName: categoriesArr?.find(
-          (cat) => cat.id === item.fields.category[0]
+          (cat) => cat.id === item.fields.categoryId[0]
         )?.name,
         categoryDisplayColor: categoriesArr?.find(
-          (cat) => cat.id === item.fields.category[0]
+          (cat) => cat.id === item.fields.categoryId[0]
         )?.color,
       };
     });

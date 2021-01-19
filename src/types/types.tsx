@@ -13,7 +13,7 @@ export interface backendResponse {
     fields: {
       teaser: string;
       title: string;
-      category: string[];
+      categoryId: string[];
     };
   }[];
 }

@@ -30,12 +30,12 @@ const ArticleList: React.FC<Props> = React.memo((props) => {
         <div className={styles.list}>
           {artListArr.map((article) => {
             return (
-              <Card
-                key={article.id}
-                article={article}
-                openModal={modalToggler}
-                catFilter={handleCatFilterChange}
-              />
+                <Card
+                  key={article.id}
+                  article={article}
+                  openModal={modalToggler}
+                  catFilter={handleCatFilterChange}
+                />
             );
           })}
         </div>

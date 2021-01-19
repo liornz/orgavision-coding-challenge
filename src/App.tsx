@@ -5,7 +5,7 @@ import Modal from './UI/Modal/Modal';
 import Toolbar from './Components/Toolbar/Toolbar';
 import Search from './Components/Search/Search';
 import Card from './Components/Card/Card';
-import getArticles from './network/getDataStatic';
+import getArticles from './network/getData';
 import { article, categoriesData } from './types/types';
 import './App.css';
 
@@ -25,9 +25,7 @@ const App: React.FC = () => {
     alert(message);
   }, []);
 
-  const articleUrl = `https://orgavision-codingchallenge.azurewebsites.net/v1/article
-    ?category=${encodeURI(categoryFilter)}
-    &search=${encodeURI(searchTxt)}`;
+  const articleUrl = `https://orgavision-codingchallenge.azurewebsites.net/v1/article?category=${encodeURI(categoryFilter)}&search=${encodeURI(searchTxt)}`;
 
   useEffect(() => {
     setIsLoading(true);
