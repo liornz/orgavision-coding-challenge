@@ -8,7 +8,7 @@ interface Props {
   catFilter: (filter: string) => void;
 }
 
-const Card: React.FC<Props> = (props) => {
+const Card: React.FC<Props> = React.memo((props) => {
   const { article, openModal, catFilter } = props;
 
   const skeletonCard = (
@@ -47,6 +47,6 @@ const Card: React.FC<Props> = (props) => {
     }
   };
   return renderCard();
-};
+});
 
 export default Card;

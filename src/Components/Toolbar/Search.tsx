@@ -10,7 +10,7 @@ interface Props {
   filteredCategory: string;
 }
 
-const Search: React.FC<Props> = (props) => {
+const Search: React.FC<Props> = React.memo((props) => {
   const { changeCategory, changeText, categories, filteredCategory } = props;
   const [textSearch, setTextSearch] = useState('');
 
@@ -29,7 +29,7 @@ const Search: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.search}>
-      <input type="text" value={textSearch} onChange={handleInputTextChange} placeholder='suchen'/>
+      <input type="text" value={textSearch} onChange={handleInputTextChange} placeholder='Suchen...'/>
       <select name="category" id="catfilter" onChange={handleCategoryChange} value={filteredCategory} >
         <option value="">Alle Kategorien</option>
         { categories !== undefined && categories.map((cat) => (
@@ -40,6 +40,6 @@ const Search: React.FC<Props> = (props) => {
       </select>
     </div>
   );
-};
+});
 
 export default Search;

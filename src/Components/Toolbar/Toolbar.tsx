@@ -9,7 +9,7 @@ const Toolbar: React.FC<Props> = React.memo((props) => {
   const { search } = props;
   return (
     <div className={styles.toolbar}>
-      <h2 className={styles.logo}>OrgaVision</h2>
+      <h2 className={styles.logo}>Knowledge Base</h2>
       {search}
     </div>
   );

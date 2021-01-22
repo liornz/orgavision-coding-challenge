@@ -1,47 +1,55 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { debounce } from 'lodash';
-import ArticleList from './containers/ArticleList/ArticleList';
-import Modal from './UI/Modal/Modal';
+import ArticleList from './Components/ArticleList/ArticleList';
+import Modal from './Components/Modal/Modal';
 import Toolbar from './Components/Toolbar/Toolbar';
-import Search from './Components/Search/Search';
-import Card from './Components/Card/Card';
+import Search from './Components/Toolbar/Search';
+import Card from './Components/ArticleList/Card';
 import getArticles from './network/getData';
 import { article, categoriesData } from './types/types';
 import './App.css';
 
 const App: React.FC = () => {
-  const [artListArr, setArtListArr] = useState<article[] | undefined>(
-    undefined
-  );
+  const [articleListArray, setArticleListArray] = useState<
+    article[] | undefined
+  >(undefined);
   const [categoriesArr, setCategoriesArr] = useState<
     categoriesData[] | undefined
   >(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryFilter, setCategoryFilter] = useState('');
-  const [searchTxt, SetSearchTxt] = useState('');
+  const [searchText, SetSearchText] = useState('');
   const [showModal, setShowModal] = useState(false);
 
   const showErrorMessage = useCallback((message: string) => {
     alert(message);
   }, []);
 
-  const articleUrl = `https://orgavision-codingchallenge.azurewebsites.net/v1/article?category=${encodeURI(categoryFilter)}&search=${encodeURI(searchTxt)}`;
+  const articleUrl = `https://orgavision-codingchallenge.azurewebsites.net/v1/article?category=${encodeURI(
+    categoryFilter
+  )}&search=${encodeURI(searchText)}`;
 
-  useEffect(() => {
-    setIsLoading(true);
-    getArticles(articleUrl)
-      .then((res) => {
-        setArtListArr(res.articleArr);
+  const reloadArticles = () => {
+    const getDataFromServer = async () => {
+      try {
+        setIsLoading(true);
+        const res = await getArticles(articleUrl);
+        setArticleListArray(res.articleArr);
         setCategoriesArr(res.categoriesArr);
         if (res.categoriesArr === undefined) {
-          showErrorMessage('Data categories could be retrieved. Display degraded!');
+          showErrorMessage(
+            'Data categories could be retrieved. Display degraded!'
+          );
         }
         setIsLoading(false);
-      })
-      .catch((err) => {
+      } catch (error) {
         setIsLoading(false);
-      });
-  }, [articleUrl, showErrorMessage]);
+      }
+    };
+    getDataFromServer();
+  };
+
+  useEffect(reloadArticles, [articleUrl, showErrorMessage]);
 
   const modalToggler = useCallback(() => {
     setShowModal((state) => !state);
@@ -51,41 +59,44 @@ const App: React.FC = () => {
     setCategoryFilter(filter);
   }, []);
 
-  const handleSearchTxtChange = debounce(
+  const handleSearchTextChange = debounce(
     useCallback((text: string) => {
-      SetSearchTxt(text);
+      SetSearchText(text);
     }, []),
     300
   );
 
   const searchComponent = (
-    <Search 
-        changeText={handleSearchTxtChange}
-        changeCategory={handleCatFilterChange}
-        categories={categoriesArr}
-        filteredCategory={categoryFilter}
-        />
+    <Search
+      changeText={handleSearchTextChange}
+      changeCategory={handleCatFilterChange}
+      categories={categoriesArr}
+      filteredCategory={categoryFilter}
+    />
   );
-
-  const articleDisplay = isLoading ? (
-    <Card 
-      article={undefined} 
-      openModal={() => {}} 
-      catFilter={() => {}} />
-  ) : (
+  const loadingCard = (
+    <Card article={undefined} openModal={() => {}} catFilter={() => {}} />
+  );
+  const articleDisplay = (
     <ArticleList
-      artListArr={artListArr}
+      articleListArray={articleListArray}
       handleCatFilterChange={handleCatFilterChange}
       modalToggler={modalToggler}
     />
   );
 
+  const renderArticles = () => {
+    if (isLoading) {
+      return loadingCard;
+    } else {
+      return articleDisplay;
+    }
+  };
+
   return (
     <div>
-      <Toolbar 
-        search={searchComponent}
-      />
-      {articleDisplay}
+      <Toolbar search={searchComponent} />
+      {renderArticles()}
       <Modal show={showModal} close={modalToggler} />
     </div>
   );
